@@ -33,7 +33,7 @@ def cipher(message,shift):
             shiftedMessage+=shiftedLetter
     return shiftedMessage
 
-def userInterface():
+def main():
     encodeOrDecode=binaryQuestion("Would you like to endcode or decode text?","Encode","Decode")
     print("Message: ")
     message=input()
@@ -59,4 +59,5 @@ def userInterface():
         print("\nDecoded message:")
     print(message)
 
-userInterface()
+if __name__ == "__main__":
+    main()
