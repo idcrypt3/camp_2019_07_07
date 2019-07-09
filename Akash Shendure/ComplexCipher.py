@@ -33,5 +33,3 @@ def binr(decimal):
 characters="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 ."
 #message=input("Message:\n")
 #key=input("\nKey:\n")
-print(len(characters))
-print(binr(8))
