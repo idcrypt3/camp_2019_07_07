@@ -28,8 +28,18 @@ def caes(number,shift):
 def binr(decimal):
     decimal-=1
     binary=format(decimal,"#08b")
-    binary=str(binary)
-    return binary
+    number=0
+    string=""
+    for letter in binary:
+        number+=1
+        if number>2:
+            string+=letter
+    return string
+def decm(binary):
+    format='0b'+binary
+    decimal=int(format)
+    return decimal+1
 characters="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 ."
 #message=input("Message:\n")
 #key=input("\nKey:\n")
+print(decm("111111"))
