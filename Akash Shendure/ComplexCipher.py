@@ -32,13 +32,16 @@ def caes(number,shift):
 def ctxt(text):
     binr=[]
     for letter in text:
-        decimal=numb(letter)
-        binary=bin(decimal)
+        decimal=numb(letter)-1
+        binary=format(decimal,"#80b")
         binr.append(binary)
     print(binr)
 def cbin(binr):
     print()
-characters="""5t'.g:0~&<p-(!fi@koy]ul1+9w_=[^,nh%vsbm2>j4ra/?zx7#"e3$;6d)c8*q """
-message=input("Message:\n")
-key=input("\nKey:\n")
-ctxt("5 oingosfnrpinf")
+#characters="""5t'.g:0~&<p-(!fi@koy]ul1+9w_=[^,nh%vsbm2>j4ra/?zx7#"e3$;6d)c8*q """
+#message=input("Message:\n")
+#key=input("\nKey:\n")
+
+#ctxt("5 oingosfnrpinf")
+
+format(decimal,"#80b")
