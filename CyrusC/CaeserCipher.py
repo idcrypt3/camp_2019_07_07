@@ -4,7 +4,7 @@ partialTwo = ""
 newAlphabet = ""
 message = input("Please enter a secret message: ")
 key = int(input("Please enter a number to shift by: "))
-#ukey = int(input(" ... "))
+
 if key == 0:
     newAlphabet = alphabet
 elif key > 0:
@@ -20,9 +20,9 @@ new_message =""
 for i in range(0,len(message)):
     index=alphabet.find(message[i])
 
-if index<0:
-    new_message += message[i]
-else:
-    new_message += newAlphabet[index]
+    if index<0:
+        new_message += message[i]
+    else:
+        new_message += newAlphabet[index]
 
 print(new_message)
