@@ -33,15 +33,13 @@ def ctxt(text):
     binr=[]
     for letter in text:
         decimal=numb(letter)-1
-        binary=format(decimal,"#80b")
+        binary=format(decimal,"#08b")
         binr.append(binary)
     print(binr)
 def cbin(binr):
     print()
-#characters="""5t'.g:0~&<p-(!fi@koy]ul1+9w_=[^,nh%vsbm2>j4ra/?zx7#"e3$;6d)c8*q """
+characters="""5t'.g:0~&<p-(!fi@koy]ul1+9w_=[^,nh%vsbm2>j4ra/?zx7#"e3$;6d)c8*q """
 #message=input("Message:\n")
 #key=input("\nKey:\n")
 
-#ctxt("5 oingosfnrpinf")
-
-format(decimal,"#80b")
+ctxt("5 oingosfnrpinf")
