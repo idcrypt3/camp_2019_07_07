@@ -37,9 +37,8 @@ def binr(decimal):
     return string
 def decm(binary):
     format='0b'+binary
-    decimal=int(format)
+    decimal=int(format,2)
     return decimal+1
 characters="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 ."
 #message=input("Message:\n")
 #key=input("\nKey:\n")
-print(decm("111111"))
