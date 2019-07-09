@@ -10,10 +10,6 @@ def char(number):
 def numb(character):
     if character=="":
         character=" "
-    if character=="{":
-        character="["
-    if character=="}":
-        character="]"
     number=characters.find(character.lower())+1
     if number==0:
         number=64
@@ -29,17 +25,13 @@ def caes(number,shift):
     shifted=number+shift
     looped=loop(shifted)
     return looped
-def ctxt(text):
-    binr=[]
-    for letter in text:
-        decimal=numb(letter)-1
-        binary=format(decimal,"#08b")
-        binr.append(binary)
-    print(binr)
-def cbin(binr):
-    print()
-characters="""5t'.g:0~&<p-(!fi@koy]ul1+9w_=[^,nh%vsbm2>j4ra/?zx7#"e3$;6d)c8*q """
+def binr(decimal):
+    decimal-=1
+    binary=format(decimal,"#08b")
+    binary=str(binary)
+    return binary
+characters="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 ."
 #message=input("Message:\n")
 #key=input("\nKey:\n")
-
-ctxt("5 oingosfnrpinf")
+print(len(characters))
+print(binr(8))
