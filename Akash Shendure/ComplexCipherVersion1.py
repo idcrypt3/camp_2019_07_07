@@ -60,6 +60,19 @@ def keys(key,length):
     for index in range(len(list)-length):
         list.pop()
     return list
+def strm(one,two):
+    for index in range(len(one)):
+        one[index]=str((bin(decm(one[index]))))^str((bin(decm(two[index]))))
+        number=0
+        string=""
+        print(one[index])
+        for letter in one[index]:
+            number+=1
+            if number>2:
+                string+=letter
+        one[index]=string
+        print(string)
+    return one
 characters="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 ."
 message=input("Message:\n")
 key=input("\nKey:\n")
@@ -69,6 +82,7 @@ while len(key)<4:
 print()
 message=tlst(message,keyc(key))
 print(message)
-print(keys(key,len(message)))
+message=strm(message,keys(key,len(message)))
+print(message)
 message=flst(message,keyc(key))
 print(message)
