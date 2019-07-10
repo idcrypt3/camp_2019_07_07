@@ -74,7 +74,7 @@ def strm(one,two):
         one[index]=threestring
     return one
 characters="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 ."
-message=input("Message:\n")
+message=input("\nMessage:\n")
 key=input("\nKey:\n")
 while len(key)<4:
     print("Key must be more than 3 characters long.")
