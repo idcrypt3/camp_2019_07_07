@@ -20,7 +20,7 @@ def loop(value,min=1,max=64):
         value=max
     return value
 def caes(number,shift):
-    shifted=number+shift
+    shifted=number+int(shift)
     looped=loop(shifted)
     return looped
 def binr(decimal):
@@ -37,22 +37,38 @@ def decm(binary):
     format='0b'+binary
     decimal=int(format,2)
     return decimal+1
-def tlst(text):
+def tlst(text,shift,yn=True):
     list=[]
     for letter in text:
-        list.append(binr(numb(letter)))
+        if yn:
+            list.append(binr(caes(numb(letter),shift)))
+        else:
+            list.append(binr(numb(letter)))
     return list
-def flst(list):
+def flst(list,shift):
     text=""
     for index in list:
-        text+=char(decm(index))
+        text+=char(caes(decm(index),-shift))
     return text
-def keyf(key):
+def keyc(key):
     shift=""
-    for fragment in tlst(key):
+    for fragment in tlst(key,0,False):
         shift+=fragment
     return int(shift)%64
+def keys(key,length):
+    list=tlst(key,0,False)*(round(length/len(key))+1)
+    for index in range(len(list)-length):
+        list.pop()
+    return list
 characters="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 ."
-#message=input("Message:\n")
+message=input("Message:\n")
 key=input("\nKey:\n")
-print(keyf(key))
+while len(key)<4:
+    print("Key must be more than 3 characters long.")
+    key = input("\nKey:\n")
+print()
+message=tlst(message,keyc(key))
+print(message)
+print(keys(key,len(message)))
+message=flst(message,keyc(key))
+print(message)
