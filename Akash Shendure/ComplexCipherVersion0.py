@@ -10,7 +10,7 @@ def char(number):
 def numb(character):
     if character=="":
         character=" "
-    number=characters.find(character.lower())+1
+    number=characters.find(character)+1
     if number==0:
         number=64
     return number
@@ -39,6 +39,18 @@ def decm(binary):
     format='0b'+binary
     decimal=int(format,2)
     return decimal+1
+def tlst(text):
+    list=[]
+    for letter in text:
+        list.append(binr(numb(letter)))
+    return list
+def flst(list):
+    text=""
+    for index in list:
+        text+=char(decm(index))
+    return text
 characters="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 ."
-#message=input("Message:\n")
+message=input("Message:\n")
 #key=input("\nKey:\n")
+print(tlst(message))
+print(flst(tlst(message)))
