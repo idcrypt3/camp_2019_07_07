@@ -62,16 +62,16 @@ def keys(key,length):
     return list
 def strm(one,two):
     for index in range(len(one)):
-        one[index]=str((bin(decm(one[index]))))^str((bin(decm(two[index]))))
-        number=0
-        string=""
-        print(one[index])
-        for letter in one[index]:
-            number+=1
-            if number>2:
-                string+=letter
-        one[index]=string
-        print(string)
+        onestring=one[index]
+        twostring=two[index]
+        threestring=""
+        onebits=[int(number) for number in onestring]
+        twobits=[int(number) for number in twostring]
+        threebits=[]
+        for iteration in range(len(onebits)):
+            threebits.append(onebits[iteration]^twobits[iteration])
+            threestring+=str(threebits[iteration])
+        one[index]=threestring
     return one
 characters="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 ."
 message=input("Message:\n")
@@ -79,10 +79,7 @@ key=input("\nKey:\n")
 while len(key)<4:
     print("Key must be more than 3 characters long.")
     key = input("\nKey:\n")
-print()
 message=tlst(message,keyc(key))
-print(message)
 message=strm(message,keys(key,len(message)))
-print(message)
 message=flst(message,keyc(key))
-print(message)
+print("\n"+message)
