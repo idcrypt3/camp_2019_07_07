@@ -4,11 +4,13 @@ from CeaserCipher import shift_cipher as shift_cypher
 from BlockCipher import pad_message as block_pad, rebuild_message as block_rebuild
 from BlockCipher import apply_rotate as block_shift, undo_rotate as block_unshift
 from DiffieHellman import find_shared_key as dh_shared_key, apply_shift as dh_shift, remove_shift as dh_unshift
-from StreamCipher import 
+from Bruteforce import decode as brute_force
+
 dh_base = 8
 dh_mod = 29
 dh_private_key = 49
 dh_public_key = dh_base ** dh_private_key % dh_mod
+
 
 def main():
     print("Hello parents!")
@@ -106,6 +108,7 @@ MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMWX0xoc;'..          ...,:ox0XWMMMMMMMMMMMMMMM
             print("Sorry, '{}' is not a valid choice. Pick 1, 2, 3, 4, or 0.".format(choice))
             continue
 
+
 def encrypt():
     print("Preparing to encrypt...")
     data = get_encrypt_input()
@@ -146,10 +149,12 @@ def encrypt():
         file.write(encrypted)
     print("Your message was successfully encrypted!\n")
 
+
 def get_encrypt_input():
     msg = input("Please enter your secret message: ")
     key = get_key()
     return msg, key
+
 
 def decrypt():
     print("Preparing to decrypt...")
@@ -176,6 +181,9 @@ def decrypt():
             shared_key = dh_shared_key(data[1], dh_public_key)
             decrypted = dh_unshift(data[0], shared_key)
             break77
+        elif cypher == 9:
+            decrypted = brute_force(data[0])
+
         elif cypher == 0:
             return
 
@@ -183,10 +191,11 @@ def decrypt():
 
     return
 
+
 def get_decrypt_input():
     localMsgs = os.listdir("msgs")
     for i in range(len(localMsgs)):
-        n = i + 1   # '0' is the choice for manual input, so we offset the count by +1
+        n = i + 1  # '0' is the choice for manual input, so we offset the count by +1
         padding = " "
         if n <= 99:
             padding += " "
@@ -217,6 +226,7 @@ def get_decrypt_input():
     key = get_key()
     return msg, key
 
+
 def get_key():
     while True:
         try:
@@ -225,6 +235,7 @@ def get_key():
         except ValueError:
             print("The secret key should be a number. Try again. ")
     return key
+
 
 # This line automatically runs the main def when you start the program.
 if __name__ == "__main__":
