@@ -1,4 +1,5 @@
 characters="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 ."
+prefix="\t"
 def char(number):
     try:
         number=int(number)
@@ -94,7 +95,7 @@ def ques(message,options):
             print("Please enter a number.")
             error=True
     return answer
-print("\n"*100+"""                       WELCOME  TO\n  _____ _       _             ____________ _____   ____\n / ____(_)     | |           |___  /  ____|  __ \ / __ \\\n| |     _ _ __ | |__   ___ _ __ / /| |__  | |__) | |  | |\n| |    | |  _ \|  _ \ / _ \ '__/ / |  __| |  _  /| |  | |\n| |____| | |_) | | | |  __/ | / /__| |____| | \ \| |__| |\n \_____|_|  __/|_| |_|\___|_|/_____|______|_|  \_\\\\____/\n         | |\n         |_|"""+"\n"*5)
+print("\x1b[7m\n"*100+"""                       WELCOME  TO\n  _____ _       _             ____________ _____   ____\n / ____(_)     | |           |___  /  ____|  __ \ / __ \\\n| |     _ _ __ | |__   ___ _ __ / /| |__  | |__) | |  | |\n| |    | |  _ \|  _ \ / _ \ '__/ / |  __| |  _  /| |  | |\n| |____| | |_) | | | |  __/ | / /__| |____| | \ \| |__| |\n \_____|_|  __/|_| |_|\___|_|/_____|______|_|  \_\\\\____/\n         | |\n         |_|"""+"\n"*5)
 while True:
     answer=ques("\nPlease select an option by typing a number and pressing enter.",["Encrypt or decrypt your own message.","Try to decrypt a preset message.","Learn about CipherZERO."])
     if answer==1:
