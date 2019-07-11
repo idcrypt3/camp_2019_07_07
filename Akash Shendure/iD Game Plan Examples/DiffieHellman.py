@@ -21,6 +21,7 @@ def find_shared_key(private_key, public_key):
     shared_key = public_key ** private_key % public_modulus
     return shared_key
 
+
 # Public Information
 public_base = 8
 public_modulus = 29

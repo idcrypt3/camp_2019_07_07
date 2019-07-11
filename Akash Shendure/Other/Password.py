@@ -1,8 +1,8 @@
-password="secret1234"
-message="Monkeys can fly."
+password = "secret1234"
+message = "Monkeys can fly."
 while True:
-    attempt=input("Password: ")
-    if attempt==password:
+    attempt = input("Password: ")
+    if attempt == password:
         print(message)
         break
     else:
