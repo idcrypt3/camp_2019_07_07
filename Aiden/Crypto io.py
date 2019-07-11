@@ -15,49 +15,76 @@ dh_mod = 29
 dh_private_key = 49
 dh_public_key = dh_base ** dh_private_key % dh_mod
 
+#End print in color
+def end_color():
+    print("\033[0m")
+
+def prRed (skk, end = "\n"):
+    print("\033[1;31;00m{}".format(skk), end=end)
+def prGreen (skk, end = "\n"):
+    print("\033[1;32;00m{}".format(skk), end=end)
+def prYellow (skk, end = "\n"):
+    print("\033[1;33;00m{}".format(skk), end=end)
+def prBlue(skk, end = "\n"):
+    print("\033[1;34;00m{}".format(skk), end=end)
+def prPurple(skk, end = "\n"):
+    print("\033[1;35;00m{}".format(skk), end=end)
+def prCyan(skk, end = "\n"):
+    print("\033[1;36;00m{}".format(skk), end=end)
+def prw(skk, end = "\n"):
+    print("\033[1;17;00m{}".format(skk), end=end)
+def prBlack(skk, end = "\n"):
+    print("\033[1;90;47m{}".format(skk), end="")
+
 def main():
     # Feel free to change this intro msg to whatever you want
-    print("Hello iD Campers, Parents, and Staff!")
-    print("Welcome to the iD Cryptography Package, cryptoIO!!")
+    prw("Hello parents and staff!", end = '')
+    prw("Welcome to the", end = '')
+    prCyan(" iD", end = '')
+    prw(" Cryptography Package, cryptoIO!!")
     print("Here you can encrypt messages and save them for others to read.")
     print("But they will only be able to decrypt them if you (remember and) share the secret keys!")
 
     # infinite loop runs until the user quits
     while True:
         print() # newline for readability
-        choice = int(input("Type 1 to encrypt, 2 to decrypt, or 0 to quit: "))
+        choice = int(input("Type 1 to\033[1;36;00m encrypt\033[1;17;00m, 2 to\033[1;36;00m decrypt\033[1;17;00m, or 0 to\033[1;31;00m quit\033[1;17;00m: "))
 
         if choice == 1:
+            print("Preparing to\033[1;36;00m encrypt\033[1;17;00m...")
             encrypt()
         elif choice == 2:
-            decrypt()
+            if len(os.listdir("msgs")) == 0:
+                print("Sorry, there are\033[1;31;00m 0\033[1;17;00m messages to\033[1;36;00m decrypt\033[1;17;00m. Try\033[1;36;00m encrypting\033[1;17;00m a\033[1;36;00m secret message\033[1;17;00m first.")
+                encrypt()
+            else:
+                decrypt()
         elif choice == 0:
-            print("Thank you for using iD Tech cryptoIO!")
+            print("Thank you for using\033[1;36;00m iD\033[1;17;00m Tech cryptoIO!")
             print("Have a good summer!")
             break
         else:
-            print("Sorry, '{}' is not a valid choice. Pick 1, 2, or 0.".format(choice))
+            print("Sorry, '{}' is\033[1;31;00m not a valid\033[1;17;00m choice. Pick 1, 2, or 0.".format(choice))
             continue
 
 def encrypt():
-    print("Preparing to encrypt...")
     data = get_encrypt_input()
 
     while True:
-        file_name = input("Please enter your message's name: ").strip()
-        if "{}".format(file_name) in os.listdir("msgs"):
-            print("Sorry, there is already a secret message with that name. Choose another.")
+        file_name = input("Please enter your\033[1;36;00m message's name\033[1;17;00m: ").strip()
+        if "{}.txt".format(file_name) in os.listdir("msgs"):
+            print("Sorry, that name is\033[1;31;00m already taken\033[1;17;00m. Please choose another.")
         else:
             break
 
     while True:
         cypher = input(
-            "1   : Ceaser (shift) Cypher\n2   : Block Cypher\n3   : Diffie-Hellman Cypher\nPlease select a cypher (1, 2, or 3): ")
+            "1   : Ceaser (shift) Cypher\n2   : Block Cypher\n3   : Diffie-Hellman Cypher\nPlease select a\033[1;36;00m cypher\033[1;17;00m (1, 2, or 3): ")
 
         try:
             cypher = int(cypher)
         except ValueError:
-            print("Sorry, {} is not a valid choice. Pick 1, 2, or 3.".format(cypher))
+            print("Sorry, {} is\033[1;31;00m not a valid\033[1;17;00m choice. Pick 1, 2, or 3.".format(cypher))
 
         if cypher == 1:
             encrypted = shift_cypher(data[0], data[1])
@@ -77,33 +104,36 @@ def encrypt():
 
     with io.open("msgs/{}.txt".format(file_name), 'w+', encoding="utf-8") as file:
         file.write(encrypted)
-    print("Your message was successfully encrypted!\n")
+    print("Your message was successfully\033[1;36;00m encrypted\033[1;17;00m!\n")
 
 def get_encrypt_input():
-    msg = input("Please enter your secret message: ")
+    msg = input("Please enter your\033[1;36;00m secret message\033[1;17;00m: ")
     key = get_key()
     return msg, key
 
 def decrypt():
-    print("Preparing to decrypt...")
+    print("Preparing to\033[1;36;00m decrypt\033[1;17;00m...")
     data = get_decrypt_input()
 
     while True:
         cypher = input(
-            "1   : Ceaser (shift) Cypher\n2   : Block Cypher\n3   : Diffie-Hellman Cypher\nPlease select a cypher (1, 2, or 3): ")
+            "1   : Ceaser (shift) Cypher\n2   : Block Cypher\n3   : Diffie-Hellman Cypher\nPlease select a\033[1;36;00m cypher\033[1;17;00m (1, 2, or 3): ")
 
         try:
             cypher = int(cypher)
         except ValueError:
-            print("Sorry, {} is not a valid choice. Pick 1, 2, or 3.".format(cypher))
+            print("Sorry, {} is\033[1;36;00m not a valid\033[1;17;00m choice. Pick 1, 2, or 3.".format(cypher))
 
         if cypher == 1:
             decrypted = shift_cypher(data[0], -data[1])
             break
         elif cypher == 2:
-            chunk_list = list(map(int, data[0].split("\n")))
-            chunk_list = block_unshift(chunk_list, data[1])
-            decrypted = block_rebuild(chunk_list)
+            try:
+                chunk_list = list(map(int, data[0].split("\n")))
+                chunk_list = block_unshift(chunk_list, data[1])
+                decrypted = block_rebuild(chunk_list)
+            except:
+                decrypted = "Sorry,\033[1;31;00m unable\033[1;17;00m to decrypt message."
             break
         elif cypher == 3:
             shared_key = dh_shared_key(data[1], dh_public_key)
@@ -129,23 +159,25 @@ def get_decrypt_input():
     print()
 
     while True:
-        choice = input("Please choose a message from above to decrypt (or, type 0 for manual entry): ")
+        choice = input("Please choose a message from above to\033[1;36;00m decrypt\033[1;17;00m (or, type 0 for manual entry): ")
 
         try:
             choice = int(choice)
         except ValueError:
-            print("Sorry, {} is not a valid choice. Pick between 0 and {}.".format(choice, len(localMsgs)))
+
+
+            print("Sorry, {} is\033[1;31;00m not a valid\033[1;17;00m choice. Pick between 0 and {}.".format(choice, len(localMsgs)))
             continue
 
         if choice == 0:
-            msg = input("Manually enter the encrypted message: ").strip()
+            msg = input("Manually enter the\033[1;36;00m encrypted message\033[1;17;00m: ").strip()
             break
         elif choice <= len(localMsgs):
             with io.open("msgs/{}".format(localMsgs[choice - 1]), 'r', encoding="utf-8") as file:
                 msg = file.read()
             break
         else:
-            print("Sorry, {} is not a valid choice. Pick between 0 and {}.".format(choice, len(localMsgs)))
+            print("Sorry, {} is\033[1;36;00m not a valid\033[1;17;00m choice. Pick between 0 and {}.".format(choice, len(localMsgs)))
 
     key = get_key()
     return msg, key
@@ -153,10 +185,10 @@ def get_decrypt_input():
 def get_key():
     while True:
         try:
-            key = int(input("Please enter your secret key: "))
+            key = int(input("Please enter your\033[1;36;00m secret key\033[1;17;00m: "))
             break
         except ValueError:
-            print("The secret key should be a number. Try again. ")
+            print("The\033[1;36;00m secret key\033[1;17;00m should be a number. Try again. ")
     return key
 
 # This line automatically runs the main def when you start the program.
@@ -181,3 +213,4 @@ if __name__ == "__main__":
 # - Display the checksum or hash of messages as they are encrypted and decrypted.
 # You could even save the checksum/hash alongside the messages, so users know if a file has been modified.
 # - Expand your cyphers with more options, or write a new one from internet tutorials.
+
