@@ -1,4 +1,4 @@
-import os, io
+import os, io, shutil
 
 # uncomment the 3 lines below and replace the names of your files (do not include .py) and function defs
 # leave "as name" as-is; this renames your functions so they are all compatible with this program,
@@ -38,17 +38,33 @@ def prBlack(skk, end = "\n"):
 
 def main():
     # Feel free to change this intro msg to whatever you want
-    prw("Hello parents and staff!", end = '')
+    prw("Hello parents and staff! ", end = '')
     prw("Welcome to the", end = '')
     prCyan(" iD", end = '')
     prw(" Cryptography Package, cryptoIO!!")
-    print("Here you can encrypt messages and save them for others to read.")
-    print("But they will only be able to decrypt them if you (remember and) share the secret keys!")
+    print("Here you can\033[1;36;00m encrypt\033[1;17;00m messages and save them for others to read.")
+    print("But they will only be able to\033[1;36;00m decrypt\033[1;17;00m them if you (remember and) share the\033[1;36;00m secret keys\033[1;17;00m!")
 
     # infinite loop runs until the user quits
     while True:
         print() # newline for readability
-        choice = int(input("Type 1 to\033[1;36;00m encrypt\033[1;17;00m, 2 to\033[1;36;00m decrypt\033[1;17;00m, or 0 to\033[1;31;00m quit\033[1;17;00m: "))
+        choice = input("Type 1 to\033[1;36;00m encrypt\033[1;17;00m, 2 to\033[1;36;00m decrypt\033[1;17;00m, or 0 to\033[1;31;00m quit\033[1;17;00m: ")
+        if choice.strip() == "Clear cache":
+            for filename in os.listdir("msgs"):
+                filepath = os.path.join("msgs", filename)
+                try:
+                    shutil.rmtree(filepath)
+                except OSError:
+                    os.remove(filepath)
+            continue
+        if choice == "Clear Aiden05":
+            print("Cyrus is gay!")
+            continue
+        try:
+            choice = int(choice)
+        except ValueError:
+            print("Sorry, \"{}\" is\033[1;31;00m not a valid\033[1;17;00m choice. Pick 0, 1, or 2.".format(choice))
+            continue
 
         if choice == 1:
             print("Preparing to\033[1;36;00m encrypt\033[1;17;00m...")
@@ -61,7 +77,7 @@ def main():
                 decrypt()
         elif choice == 0:
             print("Thank you for using\033[1;36;00m iD\033[1;17;00m Tech cryptoIO!")
-            print("Have a good summer!")
+            print("Have a good\033[1;33;00m summer\033[1;17;00m!")
             break
         else:
             print("Sorry, '{}' is\033[1;31;00m not a valid\033[1;17;00m choice. Pick 1, 2, or 0.".format(choice))
@@ -79,12 +95,13 @@ def encrypt():
 
     while True:
         cypher = input(
-            "1   : Ceaser (shift) Cypher\n2   : Block Cypher\n3   : Diffie-Hellman Cypher\nPlease select a\033[1;36;00m cypher\033[1;17;00m (1, 2, or 3): ")
+            "1   : Ceaser (shift) Cypher\n2   : Block Cypher\n3   : Diffie-Hellman Cypher\nPlease select a\033[1;36;00m cypher\033[1;17;00m (1, 2, or 3) or 0 to\033[1;31;00m quit\033[1;17;00m: ")
 
         try:
             cypher = int(cypher)
         except ValueError:
-            print("Sorry, {} is\033[1;31;00m not a valid\033[1;17;00m choice. Pick 1, 2, or 3.".format(cypher))
+            print("Sorry, \"{}\" is\033[1;31;00m not a valid\033[1;17;00m choice. Pick 1, 2, or 3.".format(cypher))
+            continue
 
         if cypher == 1:
             encrypted = shift_cypher(data[0], data[1])
@@ -101,6 +118,8 @@ def encrypt():
             break
         elif cypher == 0:
             return
+        elif cypher > 3 or cypher < 0:
+            print("Sorry, \"{}\" is\033[1;31;00m not a valid\033[1;17;00m choice. Pick 1, 2, or 3.".format(cypher))
 
     with io.open("msgs/{}.txt".format(file_name), 'w+', encoding="utf-8") as file:
         file.write(encrypted)
@@ -117,13 +136,12 @@ def decrypt():
 
     while True:
         cypher = input(
-            "1   : Ceaser (shift) Cypher\n2   : Block Cypher\n3   : Diffie-Hellman Cypher\nPlease select a\033[1;36;00m cypher\033[1;17;00m (1, 2, or 3): ")
-
+            "1   : Ceaser (shift) Cypher\n2   : Block Cypher\n3   : Diffie-Hellman Cypher\nPlease select a\033[1;36;00m cypher\033[1;17;00m (1, 2, or 3) or 0 to\033[1;31;00m quit\033[1;17;00m: ")
         try:
             cypher = int(cypher)
         except ValueError:
-            print("Sorry, {} is\033[1;36;00m not a valid\033[1;17;00m choice. Pick 1, 2, or 3.".format(cypher))
-
+            print("Sorry, \"{}\" is\033[1;31;00m not a valid\033[1;17;00m choice. Pick 1, 2, or 3.".format(cypher))
+            continue
         if cypher == 1:
             decrypted = shift_cypher(data[0], -data[1])
             break
@@ -141,6 +159,8 @@ def decrypt():
             break
         elif cypher == 0:
             return
+        elif cypher == int(cypher) and cypher > 3 or cypher < 0:
+            print("Sorry, \"{}\" is\033[1;31;00m not a valid\033[1;17;00m choice. Pick 1, 2, or 3.".format(cypher))
 
     print("The decrypted message is:\n'{}'".format(decrypted))
 
@@ -166,7 +186,7 @@ def get_decrypt_input():
         except ValueError:
 
 
-            print("Sorry, {} is\033[1;31;00m not a valid\033[1;17;00m choice. Pick between 0 and {}.".format(choice, len(localMsgs)))
+            print("Sorry, \"{}\" is\033[1;31;00m not a valid\033[1;17;00m choice. Pick between 0 and {}.".format(choice, len(localMsgs)))
             continue
 
         if choice == 0:
@@ -177,7 +197,7 @@ def get_decrypt_input():
                 msg = file.read()
             break
         else:
-            print("Sorry, {} is\033[1;36;00m not a valid\033[1;17;00m choice. Pick between 0 and {}.".format(choice, len(localMsgs)))
+            print("Sorry, \"{}\" is\033[1;31;00m not a valid\033[1;17;00m choice. Pick between 0 and {}.".format(choice, len(localMsgs)))
 
     key = get_key()
     return msg, key
