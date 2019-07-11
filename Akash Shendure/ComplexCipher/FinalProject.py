@@ -137,7 +137,8 @@ print(
 while True:
     answer = ques("\nPlease select an option by typing a number and pressing enter.",
                   ["Encrypt or decrypt your own message.", "Decrypt a preset message.",
-                   "Learn about CipherZERO."])
+                   "Learn about CipherZERO.",
+                   "Exit."])
     if answer == 1:
         message = input("\nPlease enter the message:\n")
         key = input("\nPlease enter the key:\n")
@@ -165,3 +166,5 @@ while True:
         print("The cool thing about CipherZERO is that it is fully reversible.")
         print("Seperate code is not used for encryption and decryption because the same methods are used for both.")
         print("CipherZERO was created at iD Tech by Akash Shendure during a Cybersecurity and Encryption course.")
+    else:
+        break
