@@ -73,7 +73,7 @@ def strm(one,two):
         one[index]=threestring
     return one
 def cphr(message,key):
-    print("\nCiphered Message:\n"+flst(strm(tlst(message,keyc(key)),keys(key,len(tlst(message,keyc(key))))),keyc(key)))
+    return flst(strm(tlst(message,keyc(key)),keys(key,len(tlst(message,keyc(key))))),keyc(key))
 def ques(message,options):
     print(message)
     for number in range(len(options)):
@@ -94,15 +94,7 @@ def ques(message,options):
             print("Please enter a number.")
             error=True
     return answer
-print("\n"*100+"""                       WELCOME  TO
-  _____ _       _             ____________ _____   ____
- / ____(_)     | |           |___  /  ____|  __ \ / __ \\
-| |     _ _ __ | |__   ___ _ __ / /| |__  | |__) | |  | |
-| |    | |  _ \|  _ \ / _ \ '__/ / |  __| |  _  /| |  | |
-| |____| | |_) | | | |  __/ | / /__| |____| | \ \| |__| |
- \_____|_|  __/|_| |_|\___|_|/_____|______|_|  \_\\\\____/
-         | |
-         |_|"""+"\n"*5)
+print("\n"*100+"""                       WELCOME  TO\n  _____ _       _             ____________ _____   ____\n / ____(_)     | |           |___  /  ____|  __ \ / __ \\\n| |     _ _ __ | |__   ___ _ __ / /| |__  | |__) | |  | |\n| |    | |  _ \|  _ \ / _ \ '__/ / |  __| |  _  /| |  | |\n| |____| | |_) | | | |  __/ | / /__| |____| | \ \| |__| |\n \_____|_|  __/|_| |_|\___|_|/_____|______|_|  \_\\\\____/\n         | |\n         |_|"""+"\n"*5)
 while True:
     answer=ques("\nPlease select an option by typing a number and pressing enter.",["Encrypt or decrypt your own message.","Try to decrypt a preset message.","Learn about CipherZERO."])
     if answer==1:
@@ -111,8 +103,16 @@ while True:
         while len(key) < 2:
             print("The key must be more than one character long.")
             key = input("\nPlease enter the key:\n")
-        cphr(message,key)
+        print("\nCiphered Message:\n"+cphr(message,key))
     if answer==2:
-        print("Go play Fortnite.")
+        options=["I ate dinner.","We had a three-course meal.","Brad came to dinner with us.","He loves fish tacos.","In the end, we all felt like we ate too much.","We all agreed; it was a magnificent evening."]
+        for option in range(len(options)):
+            options[option]=cphr(options[option],"Decrypt")
+        sentence=options[ques("\nPlease select a message to decrypt. The key for each option is 'Decrypt'",options)-1]
+        key = input("\nPlease enter the key:\n")
+        while len(key) < 2:
+            print("The key must be more than one character long.")
+            key = input("\nPlease enter the key:\n")
+        print("\nCiphered Message:\n"+cphr(sentence,key))
     if answer==3:
-        print("Go play Minecraft.")
+        print("\nCipherZERO is a cipher that combines Caesar Cipher and Stream Cipher to transform text into unreadable gibberish.\nThe cool thing about CipherZERO is that it is fully reversible.\nSeperate code is not needed for encryption and decryption because CipherZERO uses the exact same methods to do both.\nCipherZERO was created at iD Tech by Akash Shendure during a Cybersecurity and Encryption course.")
