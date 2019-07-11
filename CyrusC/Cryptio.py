@@ -167,7 +167,7 @@ def decrypt():
         try:
             cypher = int(cypher)
         except ValueError:
-            print("Sorry, {} is not a valid choice. Pick 1, 2, or 3.".format(cypher))
+            print("Sorry, {} is not a valid choice. Pick 1, 2, or 3. ".format(cypher))
 
         if cypher == 1:
             decrypted = shift_cypher(data[0], -data[1])
@@ -180,7 +180,7 @@ def decrypt():
         elif cypher == 3:
             shared_key = dh_shared_key(data[1], dh_public_key)
             decrypted = dh_unshift(data[0], shared_key)
-            break77
+            break
         elif cypher == 9:
             decrypted = brute_force(data[0])
 
@@ -210,7 +210,7 @@ def get_decrypt_input():
         try:
             choice = int(choice)
         except ValueError:
-            print("Sorry, {} is not a valid choice. Pick between 0 and {}.".format(choice, len(localMsgs)))
+            print("Sorry, {} is not a valid choice. Pick between 0 and {}. ".format(choice, len(localMsgs)))
             continue
 
         if choice == 0:
@@ -237,6 +237,5 @@ def get_key():
     return key
 
 
-# This line automatically runs the main def when you start the program.
 if __name__ == "__main__":
     main()
