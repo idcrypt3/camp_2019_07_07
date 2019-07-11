@@ -24,7 +24,7 @@ def rebuild_message(message_list, block_size=4):
     for i in range(len(message_list)):
         chunk = message_list[i]
         for c in range(block_size):
-            number = (chunk >> (8 * (block_size - 1 - c))) % 2**8
+            number = (chunk >> (8 * (block_size - 1 - c))) % 2 ** 8
             message += chr(number)
     return message
 
