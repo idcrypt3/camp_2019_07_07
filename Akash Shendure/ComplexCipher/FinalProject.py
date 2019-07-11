@@ -136,7 +136,7 @@ print(
                 |_|""" + "\n" * 5)
 while True:
     answer = ques("\nPlease select an option by typing a number and pressing enter.",
-                  ["Encrypt or decrypt your own message.", "Try to decrypt a preset message.",
+                  ["Encrypt or decrypt your own message.", "Decrypt a preset message.",
                    "Learn about CipherZERO."])
     if answer == 1:
         message = input("\nPlease enter the message:\n")
