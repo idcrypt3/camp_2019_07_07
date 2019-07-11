@@ -159,8 +159,7 @@ while True:
             key = input("\nPlease enter the key:\n")
         print("\nCiphered Message:\n" + cphr(sentence, key))
     if answer == 3:
-        print(
-            "\nCipherZERO is a cipher that uses Caesar Cipher and Stream Cipher to make text completely unreadable.",
-            "The cool thing about CipherZERO is that it is fully reversible.",
-            "Seperate code is not used for encryption and decryption because the exact same methods are used for both.",
-            "CipherZERO was created at iD Tech by Akash Shendure during a Cybersecurity and Encryption course.")
+        print("\nCipherZERO is a cipher that uses Caesar Cipher and Stream Cipher to make text completely unreadable.")
+        print("The cool thing about CipherZERO is that it is fully reversible.")
+        print("Seperate code is not used for encryption and decryption because the same methods are used for both.")
+        print("CipherZERO was created at iD Tech by Akash Shendure during a Cybersecurity and Encryption course.")
