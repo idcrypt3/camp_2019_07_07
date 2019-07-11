@@ -3,7 +3,6 @@ text = ""
 for i in numbers:
     text += chr(i)
 print(text)
-print(numbers)
 for c in text:
     N = ord(c)
 print (hex(N))
