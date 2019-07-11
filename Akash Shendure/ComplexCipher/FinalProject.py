@@ -158,7 +158,7 @@ while True:
             print("The key must be more than one character long.")
             key = input("\nPlease enter the key:\n")
         print("\nCiphered Message:\n" + cphr(sentence, key))
-        if key!="Decrypt":
+        if key != "Decrypt":
             print("You used an incorrect key.")
     if answer == 3:
         print("\nCipherZERO is a cipher that uses Caesar Cipher and Stream Cipher to make text completely unreadable.")
