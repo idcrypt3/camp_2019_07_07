@@ -180,7 +180,7 @@ def decrypt():
         elif cypher == 3:
             shared_key = dh_shared_key(data[1], dh_public_key)
             decrypted = dh_unshift(data[0], shared_key)
-            break77
+            break
         elif cypher == 9:
             decrypted = brute_force(data[0])
 
@@ -237,6 +237,5 @@ def get_key():
     return key
 
 
-# This line automatically runs the main def when you start the program.
 if __name__ == "__main__":
     main()
