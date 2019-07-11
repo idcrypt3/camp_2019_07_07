@@ -166,5 +166,5 @@ while True:
         print("The cool thing about CipherZERO is that it is fully reversible.")
         print("Seperate code is not used for encryption and decryption because the same methods are used for both.")
         print("CipherZERO was created at iD Tech by Akash Shendure during a Cybersecurity and Encryption course.")
-    else:
+    if answer == 4:
         break
