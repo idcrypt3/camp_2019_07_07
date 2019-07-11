@@ -22,8 +22,8 @@ public_modulus = 29
 
 alice_private_key = 5
 bob_private_key = 7
-alice_message = "Hello Bob"
-
+#alice_message = "Hello Bob"
+alice_message = ""
 alice_public_key = public_base**alice_private_key % public_modulus
 bob_public_key = public_base**bob_private_key % public_modulus
 

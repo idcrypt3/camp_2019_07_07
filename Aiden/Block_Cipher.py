@@ -31,7 +31,7 @@ def apply_shift(message_list, key, block_size=4):
         cipher = (chunk >> key) + carry
         cipher_list.append(cipher)
     return cipher_list
-def undo_shift(message_list, key, block_size=4):
+def undo_shift(cipher_list, key, block_size=4):
     message_list = []
     bit_max = block_size * 8
     for i in range(len(cipher_list)):
@@ -43,14 +43,16 @@ def undo_shift(message_list, key, block_size=4):
     return message_list
 
 
+def main():
+    plaintext = "Hello world!"
+    key = 10
+    text_list = pad_message(plaintext)
+    cipher_list = apply_shift(text_list, key)
+    print(cipher_list)
+    cipher = rebuild_message(cipher_list)
+    message_list = undo_shift(cipher_list, key)
+    message = rebuild_message(message_list)
+    print(message)
 
-plaintext = "iD Tech Camps!"
-key = 10
-text_list = pad_message(plaintext)
-cipher_list = apply_shift(text_list, key)
-cipher = rebuild_message(cipher_list)
-print(cipher)
-message_list = undo_shift(cipher_list, key)
-message = rebuild_message(message_list)
-print(message)
-
+if __name__ == "__main__":
+    main()

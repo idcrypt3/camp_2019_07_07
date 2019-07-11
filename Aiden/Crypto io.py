@@ -95,7 +95,7 @@ def encrypt():
 
     while True:
         cypher = input(
-            "1   : Ceaser (shift) Cypher\n2   : Block Cypher\n3   : Diffie-Hellman Cypher\nPlease select a\033[1;36;00m cypher\033[1;17;00m (1, 2, or 3) or 0 to\033[1;31;00m quit\033[1;17;00m: ")
+            "1   : Ceaser (shift) Cipher\n2   : Block Cipher\n3   : Diffie-Hellman Cipher\nPlease select a\033[1;36;00m cipher\033[1;17;00m (1, 2, or 3) or 0 to\033[1;31;00m quit\033[1;17;00m: ")
 
         try:
             cypher = int(cypher)
@@ -136,7 +136,7 @@ def decrypt():
 
     while True:
         cypher = input(
-            "1   : Ceaser (shift) Cypher\n2   : Block Cypher\n3   : Diffie-Hellman Cypher\nPlease select a\033[1;36;00m cypher\033[1;17;00m (1, 2, or 3) or 0 to\033[1;31;00m quit\033[1;17;00m: ")
+            "1   : Ceaser (shift) Cipher\n2   : Block Cipher\n3   : Diffie-Hellman Cipher\nPlease select a\033[1;36;00m cipher\033[1;17;00m (1, 2, or 3) or 0 to\033[1;31;00m quit\033[1;17;00m: ")
         try:
             cypher = int(cypher)
         except ValueError:
