@@ -4,32 +4,106 @@ from CeaserCipher import shift_cipher as shift_cypher
 from BlockCipher import pad_message as block_pad, rebuild_message as block_rebuild
 from BlockCipher import apply_rotate as block_shift, undo_rotate as block_unshift
 from DiffieHellman import find_shared_key as dh_shared_key, apply_shift as dh_shift, remove_shift as dh_unshift
-
+from StreamCipher import 
 dh_base = 8
 dh_mod = 29
 dh_private_key = 49
 dh_public_key = dh_base ** dh_private_key % dh_mod
 
 def main():
-    print("Hello iD Campers, Parents, and Staff!")
-    print("Welcome to the iD Cryptography Package, cryptoIO!!")
+    print("Hello parents!")
+    print("Welcome to my Cryptography Package, cryptoIO!!")
     print("Here you can encrypt messages and save them for others to read.")
     print("But they will only be able to decrypt them if you (remember and) share the secret keys!")
+    print("I hope you will enjoy!")
 
     while True:
         print()
-        choice = int(input("Type 1 to encrypt, 2 to decrypt, or 0 to quit: "))
+        choice = int(input("Type 1 to encrypt, 2 to decrypt, 3 to see colors, 4 for ascii art, or 0 to quit: "))
 
         if choice == 1:
             encrypt()
         elif choice == 2:
             decrypt()
+        elif choice == 3:
+            numbers = [0x69, 0x44, 0x54, 0x65, 0x63, 0x68]
+            text = ""
+            for i in numbers:
+                text += chr(i)
+            for c in text:
+                N = ord(c)
+
+            csi = "\x1b["
+            color = "34m"
+            colored_text = csi + color + text
+            print(colored_text)
+
+            escape = "\x1b["
+            color = "31m"
+            colored_text = escape + color + text
+            print(colored_text)
+
+            cool = "\x1b["
+            color = "41m"
+            colored_text = cool + color + text
+            print(colored_text)
+        elif choice == 4:
+            print("""MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMWX0kdl:;,,'''...........'',,;:clxOXWMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMMMMMMMMWXOdc;''',;:coddxxxkkkkkkkxxxddolc:;'''';cdOXWMMMMMMMMMMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMMMMWXOo:'..  .':oxkOOOOOOOOOOkkkkkkkkkkkkkkkxdl:'...;oOXWMMMMMMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMWKxc,',:oxxdol:;,',;cdkOOOOOOOOOkkkkkkkkkkkkkkkkxo:.   .:xKWMMMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMXkc'.;lxOOOOOOOOOOOxo:,',:oxOOOOOOOOkkkkkkkkkkkkkkkkkdc'. ...:xXWMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMW0o,.,lxO000000000OOOO0OOOxl;'';lxOOOOOOkOkkkkkkkkkkkkkkkxxl'.';'.'l0WMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMW0c.':xO00000000000000000000OOOko;'';cokOOOOOOkkkkkkkkkkkkkkxxd:..cl;..:OWMMMMMMMMMMMMM
+MMMMMMMMMMMW0c.'lk00000000000000000000000000OOOxl;'.'cdkOOOOkkkkkkkkkkkkkkxkxl'.:dd:..:OWMMMMMMMMMMM
+MMMMMMMMMMKl..ckO00000000000000000000000000000OOOOkxc'.;lxOOOOkkkkkkkkkkkkkkxxo,.;dxd:..cKWMMMMMMMMM
+MMMMMMMMNx'.:xOOO000000000000000000000000000000OO0OOOko;'':dkOOkkkkkkkkkkkkkkkkd,.;dxxo;.'xNMMMMMMMM
+MMMMMMMKc.'oOOO000000000000000000000000000000000O00OOOOOxc,.,cxkkkkkkkkkkkkkkxxxo'.:xxxdl'.:KMMMMMMM
+MMMMMW0,.:xOOOO00000000000000000KKK000000000000000OOOOOOOOko:'';oxkkkkkkkkkkkkkxxl..lxxxxo;.,OWMMMMM
+MMMMWk'.ckOOOOOO000000000000000KKKKKK000000000000000OOOOOOOOOxl;.':oxkkkkkkkkkkkxx:.,dxxxxd:..xWMMMM
+MMMWk'.lkOOOOOOOO00000000000000KKKKKKK00000000000000OOOOOOOOOOOkdc,'';cdxkkkkkkkxxo'.lxxxxxdc..xWMMM
+MMWk'.lkOOOOOOOOOO0000000000000000KKK00000000000000000OOOOOOOOOOOOkxl;''';codxkkkxx:.;dxxdlc;. .xWMM
+MM0,.ckOOOOOOOOOOOO00000000000000000000000000000000000OOOOOOOOOOOOOOOkxdc;,''',;;;:' .,,'''',:;.'OMM
+MX:.;kOOOOOOOOOOOOOOO00000000000000000000000000000000OOOOOOOOOOOOOOOkkkkkkkxolc:;;,,. ':clodxxd;.;KM
+Wd.'dkkkOOOOOkkkxxdddoooooooooodddxxkkkOOO00000000000OOOOOOOOOOOOOOOkkkkkkkkkkkkkkxd,.:xxxxxxxxo'.oN
+0,.ckkkdoc:;,,,,,,,,,,,,,,,,,,,,,,,,,,,,,;;;;::clloodxxkOOOOOOOOOOOOkkkkkkkkkkkkkkxx;.;xxxxxxxxxc.'O
+d.'ol;,'',;:clodxxkkkOOOOOOOOOOOOOOkkkxxddollc::;;,,,,,,,,;::clodxkkkkkkkkkkkkkkkkkx;.;xxxxxxxxxd,.l
+; ...;cdxkkkOOOOOOOOOOOOOOOOOOOO0000000000000000OOOOkkxdolc:;;,,,',,;:clodxkkkkkkkkx;.;xxxxxxxxxxc.,
+. .cdkkkkkkkkkkOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOkkxdol:;,,''',;:cldxxx;.:xxxxxxxxxxl..
+ .oxkkkkkkkkkkkkOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOkkkkxdoc:;,''',,..;dxxxxxxxxxo' 
+ ,xxkkkkkkkkkkkkkkkkOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOkkkkkkkkkkkkkxxdlc,. .',;codxxxxd, 
+ ,xxkkkkkkkkkkkkkkkkkkkOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOkkkkkkkkkkkkkkkkkkkl..ll:,'.',:ldd; 
+ ,xxxxxkkkkkkkkkkkkkkkkkkkOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOkkkkkkkkkkkkkkkkkkkkxx;.;xxxxdoc;'.';' 
+ ,dxxxxxxkkkkkkkkkkkkkkkkkkkkOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOkkkkkkkkkkkkkkkkkkkkkkko'.cxxxxxxxxdl;.  
+..oxxxxxxxxxxkkkkkkkkkkkkkkkkkkkkkkkOOOOOOOOOOOOOOOOOOOOOkkkkkkkkkkkkkkkkkkkkkkkkxc.'dxxxxxxxxxxdl. 
+'.cxxxxxxxxxxxkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkxxxdddddxxxd'.cxxxxxxxxxxxxc..
+c.;dxxxxxxxxxxxxxkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkxolc:;,,'''''''',,'.'dxxxxxxxxxxxd;.:
+k..lxxxxxxxxxxxxxxxxkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkxol:;,''',;:cloooddoolc'  .;oxxxxxxxxxdl..x
+Nc.,dxxxxxxxxxxxxxxxxxxkkkkkkkkkkkkkkkkkkkkkkkkkkkkxdoc;,''',:codxkkkkkkkxxxxxxd,.,;..:dxxxxxddd;.:X
+MO'.cdxxxxxxxxxxxxxxxxxxxxxxxkkkkkkkkkkkkkkkkxdoc;,,''';cldxkkkkkkkkkkkkxxxxxxx:.,oxo,.,oxxxxddc..kM
+MWd..lddxxxxxxxxxxxxxxxxxxxxxxxxkkkkkkkkxdl:;''',;:codxkkkkkkkkkkkkxxxxxxxxxxxc..lxxxd;.,oxxxdl'.oWM
+MMNl.'odddddxxxxxxxxxxxxxxxxxxxxxkxdoc:,''',;codxkkkkkkkkkxxxxxxxxxxxxxxxxxxxl..cxxxxxo'.:dxdo,.cXMM
+MMMXc.'odddddxxxxxxxxxxxxxxxxdoc:;,''',:codxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxl..cxxxxxxxc..ldo,.:KMMM
+MMMMXc.'ldddddxddddddolcc:;,'''',;:lodxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxc..cdxxxxxxxo,.:o,.:KMMMM
+MMMMMNo..'',,,,,,'''''''',;:clodxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxdc..cxxxxxxdddd:....lXMMMMM
+MMMMMMNx. .,;;;:::ccloodddxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxd;.'ldxxxdddddddc. .dNMMMMMM
+MMMMMMMW0;.'lddxddddxxxdddddddxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxl'.,oxdddddddxddl'.,OWMMMMMMM
+MMMMMMMMMXd'.;odddddddddddddddddddddxxxxxxxxxxxxxxxxxxxxxxxxxxxxxdxxxd:..:dxxddddddddo;..oXMMMMMMMMM
+MMMMMMMMMMWKl..:oddddddddddddddddddddddddddddxxxxxxxxxxxxxxxxxddddxdl'.,lddddddddddo:..c0WMMMMMMMMMM
+MMMMMMMMMMMMW0c..;odddddddddddddddddddddddddddddddddddddddddddddddl,..cddddddddddo:..cOWMMMMMMMMMMMM
+MMMMMMMMMMMMMMW0l'.,codddddddddddddddxddddddddddddddddddddddddddl;..:odddddddddc,.'l0WMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMWKd;..;coddddddddddddddddddddddddddddddddddddoc,.':oddddddddl;..;dKWMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMW0o;..,:odddddddddddddddddddddddddddddddl;'.,coddddxdoc,..,oONMMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMMMN0d:'.',:loddddddddddddddddddddxdoc;'.':ldxdddl:;'.':d0NMMMMMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMMMMMMWXOd:,'.',;clodddddxdddoolc:,'..,:loolc:,'.',:okXWMMMMMMMMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMWNKkdc;,''''',,,,'...    ..',''''',;cok0NWMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMWX0xoc;'..          ...,:ox0XWMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM""")
         elif choice == 0:
-            print("Thank you for using iD Tech cryptoIO!")
-            print("Have a good summer!")
+            print("Thank you for using cryptoIO!")
+            print("Bye!")
             break
         else:
-            print("Sorry, '{}' is not a valid choice. Pick 1, 2, or 0.".format(choice))
+            print("Sorry, '{}' is not a valid choice. Pick 1, 2, 3, 4, or 0.".format(choice))
             continue
 
 def encrypt():
@@ -50,7 +124,7 @@ def encrypt():
         try:
             cypher = int(cypher)
         except ValueError:
-            print("Sorry, {} is not a valid choice. Pick 1, 2, or 3.".format(cypher))
+            print("Sorry, {} is not a valid choice. Pick 1, 2, 3, 4, or 0.".format(cypher))
 
         if cypher == 1:
             encrypted = shift_cypher(data[0], data[1])
@@ -101,7 +175,7 @@ def decrypt():
         elif cypher == 3:
             shared_key = dh_shared_key(data[1], dh_public_key)
             decrypted = dh_unshift(data[0], shared_key)
-            break
+            break77
         elif cypher == 0:
             return
 
