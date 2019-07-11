@@ -132,8 +132,8 @@ print(
 | |    | |  _ \|  _ \ / _ \ '__/ / |  __| |  _  /| |  | |
 | |____| | |_) | | | |  __/ | / /__| |____| | \ \| |__| |
  \_____|_|  __/|_| |_|\___|_|/_____|______|_|  \_\\\\____/
-                | |
-                |_|""" + "\n" * 5)
+         | |
+         |_|""" + "\n" * 5)
 while True:
     answer = ques("\nPlease select an option by typing a number and pressing enter.",
                   ["Encrypt or decrypt your own message.", "Decrypt a preset message.",
